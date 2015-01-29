@@ -57,3 +57,9 @@
       </div>
     </div>
   </div>
+  <p><% @quotes.each do |value,key| %></p>
+    <p><%= value %></p>
+    <p>&nbsp;</p>
+
+    <p class ="text-muted"><em><%= key %></em></p>
+  <% end %>
