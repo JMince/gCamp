@@ -17,3 +17,9 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
  body { padding-top: 70px; }
+
+ .small_image {
+   width: 2%;
+   float: right;
+   padding-right: 5px;
+ }
