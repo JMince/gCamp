@@ -1,8 +1,8 @@
 class CommonQuestion
-  def initialize(question, answer)
+  def initialize(question, answer, slug)
     @question = question
     @answer = answer
-    @slug = @question.gsub(" ", "-")
+    @slug = slug
 
 end
 
