@@ -14,7 +14,8 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      redirect_to tasks_path
+      flash[:notice] = "Task was successfully created"
+      redirect_to task_path(@task)
     else
       @task = Task.new(task_params)
       render:new
