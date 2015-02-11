@@ -5,7 +5,6 @@
 <%= task.description %> <%= link_to "Show", task_path(task[:id])  %>
      <%= link_to 'Edit', edit_task_path(task[:id]) %>
      <%= link_to "Destroy", task_path(task[:id]), method: :delete %>
-     <p><%= link_to 'New Task', new_task_path %></p>
      <p>&nbsp;</p>
 </div>
 <% end %>
