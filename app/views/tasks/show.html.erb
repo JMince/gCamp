@@ -1,7 +1,8 @@
 
 
-<p>&nbsp;</p>
-<p>Task was successfully created</p>
+<% if notice %>
+ <p class="alert alert-success" role="alert"><%= notice %></p>
+ <% end %>
 <p>&nbsp;</p>
 
 <strong>Description:</strong> <%= @task.description %>
