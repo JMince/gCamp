@@ -1,8 +1,11 @@
 <h1>Listing Tasks</h1>
 <p>Description</p>
 <% @tasks.each do |task| %>
-<div>
-<p><%= task.description %>  <%= link_to "Show", task_path(task[:id]) %></p>
+<div class = 'form-group'>
+<%= task.description %> <%= link_to "Show", task_path(task[:id])  %>
+     <%= link_to 'Edit', edit_task_path(task[:id]) %>
+     <%= link_to "Destroy", task_path(task[:id]), method: :delete %>
+     <p><%= link_to 'New Task', new_task_path %></p>
+     <p>&nbsp;</p>
 </div>
-
 <% end %>
