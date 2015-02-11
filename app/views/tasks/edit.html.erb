@@ -8,3 +8,4 @@
 
   <p><%= f.submit "Update Task" %></p>
 <% end %>
+<p><%= link_to 'Show', task_path(@task[:id]) %> | <%= link_to 'Back', tasks_path %></p>
