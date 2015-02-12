@@ -6,7 +6,13 @@
 
 <div class = "page-header">
   <%= link_to 'Edit', edit_task_path(@task[:id]), class: "btn btn-info pull-right" %>
-<h1><%= @task.description %></h1>
+
+  <% if @task.complete == true %>
+    <s><h1><%= @task.description %></h1></s>
+
+      <% else %>
+      <h1><%= @task.description %></h1>
+      <% end %>
 </div>
 <div class="form-horizontal">
   <%= link_to "Tasks", tasks_path %> >

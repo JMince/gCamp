@@ -1,11 +1,31 @@
-<h1>Editing Task</h1>
+<div class = "page-header">
+<h1>Edit Task</h1>
+</div>
+<div class="form-horizontal">
+<%= link_to "Tasks", tasks_path %> >
+<%= link_to @task.description, tasks_path %> >
+<class="active">Edit Task
+</br></br>
 
-<%= form_for @task, url: task_path(@task), method: :patch do |f| %>
-  <div>
-    <%= f.label :name, 'Description' %>
-    <p><%= f.text_field :description %></p>
+<%= form_for @task do |f| %>
+
+<div class ="form-group">
+  <%= f.label :description, class: "col-sm-2 control-label" %>
+ <div class = "col-sm-4">
+  <%= f.text_field :description %>
+</div>
+</div>
+<div class ="form-group">
+<div class = "col-sm-offset-2 col-sm-10">
+  <%= f.check_box :complete %>
+  <%= f.label :complete %>
   </div>
+</div>
+<div class ="form-group">
+<div class = "col-sm-offset-2 col-sm-10">
+  <%= f.submit "Update Task", class: "btn btn-primary" %>
+  <%= link_to 'Cancel', tasks_path, class: "btn btn-default" %>
+</div>
+</div>
 
-  <p><%= f.submit "Update Task" %></p>
 <% end %>
-<p><%= link_to 'Show', task_path(@task[:id]) %> | <%= link_to 'Back', tasks_path %></p>
