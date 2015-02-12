@@ -1,12 +1,21 @@
+<div class = "page-header">
 <h1>New Task</h1>
+</div>
+<div class="form-horizontal">
+  <%= link_to "Tasks", tasks_path %> >
+  <class="active">New Task
+</div>
 
-<%= form_for Task.new do |f| %>
-  <div>
-    <%= f.label :name, 'Description' %>
-    <p><%= f.text_field :description %></p>
+</br>
+<p><%= form_for Task.new do |f| %></p>
+
+<div class ="form-group">
+    <%= f.label :name, 'Description', class: "col-sm-2 control-label" %>
+  <div class = "col-sm-4">
+    <%= f.text_field :description %>
   </div>
-
-  <p><%= f.submit "Create Task" %></p>
+</div>
+    <br>
+  <%= f.submit "Create Task", class: "btn btn-primary" %>
+  <%= link_to 'Cancel', tasks_path, class: "btn btn-default" %>
 <% end %>
-
-<p><%= link_to 'Back', tasks_path %></p>
