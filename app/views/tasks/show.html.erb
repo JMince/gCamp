@@ -8,7 +8,7 @@
   <%= link_to 'Edit', edit_task_path(@task[:id]), class: "btn btn-info pull-right" %>
 
   <% if @task.complete == true %>
-    <s><h1><%= @task.description %></h1></s>
+    <h1><s><%= @task.description %></s></h1>
 
       <% else %>
       <h1><%= @task.description %></h1>
