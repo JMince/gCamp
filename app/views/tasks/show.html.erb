@@ -9,7 +9,6 @@
 
   <% if @task.complete == true %>
     <h1><s><%= @task.description %></s></h1>
-
       <% else %>
       <h1><%= @task.description %></h1>
       <% end %>
@@ -20,3 +19,7 @@
     <li class="active"><%= @task.description %></li>
   </ol>
 </div>
+<p><% if @task.date %></p>
+      <strong>Due On:</strong>
+      <%= @task.date.strftime("%m/%d/%Y") %>
+      <% end %>

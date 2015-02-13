@@ -13,18 +13,22 @@
             <th>Description</th>
           </div>
           <div class = "col-sm-3">
-          <th>Due Date</th>
+          <th>Due On</th>
         </tr>
       </thead>
       <tbody>
         <% @tasks.each do |task| %>
         <tr>
           <% if task.complete %>
-              <td><s><%= link_to task.description, task_path(task) %></s></td>
+              <td class = "col-sm-3"><s><%= link_to task.description, task_path(task) %></s></td>
           <% else %>
               <td><%= link_to task.description, task_path(task) %></td>
           <% end %>
-              <td><%= task.date %></td>
+              <td><% if task.date %>
+                    <%= task.date.strftime("%m/%d/%Y") %>
+                    <% end %>
+              </td>
+
              <td>
           <div class = "pull-right">
             <%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %>
