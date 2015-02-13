@@ -15,6 +15,8 @@
       <% end %>
 </div>
 <div class="form-horizontal">
-  <%= link_to "Tasks", tasks_path %> >
-  <class="active">New Task
+  <ol class="breadcrumb">
+    <li><%= link_to "Tasks", tasks_path %></li>
+    <li class="active"><%= link_to @task.description %></li>
+  </ol>
 </div>
