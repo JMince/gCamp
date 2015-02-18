@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/faq', to: 'common_questions#index'
 
   resources :tasks
+  resources :users
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
