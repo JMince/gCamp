@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = "User was successfully created"
-      redirect_to user_path(@user)
+      redirect_to users_path(@user)
     else
       @user = User.new(user_params)
       render:new
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
 
   private
 
-  def task_params
+  def user_params
     params.require(:user).permit(:first_name, :last_name, :email)
   end
 
