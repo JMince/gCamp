@@ -1,0 +1,20 @@
+<% if notice %>
+ <p class="alert alert-success" role="alert"><%= notice %></p>
+ <% end %>
+
+<div class = "page-header">
+  <%= link_to 'Edit', edit_user_path(@user[:id]), class: "btn btn-info pull-right" %>
+
+      <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+</div>
+<dl class="dl-horizontal">
+
+        <dt><b>First Name</b></dt>
+        <dd><%= @user.first_name %></dd>
+    <br>
+        <dt><b>Last Name</b></dt>
+        <dd><%= @user.last_name %></dd>
+    <br>
+        <dt><b>Email</b></dt>
+        <dd><%= mail_to @user.email %></dd>
+</dl>
