@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   end
 
 
-
   def create
     @user = User.new(user_params)
 
@@ -17,7 +16,6 @@ class UsersController < ApplicationController
       flash[:notice] = "User was successfully created"
       redirect_to users_path(@user)
     else
-      @user = User.new(user_params)
       render:new
     end
   end
