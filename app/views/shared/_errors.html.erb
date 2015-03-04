@@ -1,0 +1,14 @@
+<div class = "form-group">
+<% if object.errors.any? %>
+<div class = "col-sm-6 col-sm-offset-2">
+  <div class = "alert alert-danger">
+    <h3> <%= pluralize(object.errors.count, "Error") %> prohibted this object from being saved </h3>
+    <ul>
+      <% object.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+ </div>
+</div>
+<% end %>
+</div>

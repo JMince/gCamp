@@ -1,8 +1,32 @@
-<%= form_for Task.new do |f| %>
-  <div>
-    <%= f.label :name, 'Description' %>
-    <p><%= f.text_field :description %></p>
+<%= form_for @task do |f| %>
+<%= render partial: "/shared/errors", locals:{object: @task} %>
+<div class ="form-group">
+    <%= f.label :name, 'Description', class: "col-sm-2 control-label" %>
+   <div class = "col-sm-4">
+    <%= f.text_field :description, class:"form-control" %>
   </div>
+</div>
 
-  <p><%= f.submit name_of_button %></p>
+<div class ="form-group">
+   <%= f.label :name, "Due Date", class: "col-sm-2 control-label" %>
+  <div class = "col-sm-4">
+    <%= f.date_field :date, class: "col-sm-4 form-control" %>
+  </div>
+</div>
+
+<div class="form-group">
+ <div class = "col-md-offset-2 col-md-10">
+   <%= f.check_box :complete %>
+   <%= f.label :complete %>
+ </div>
+ </div>
+
+
+<div class ="form-group">
+  <div class = "col-sm-offset-2 col-sm-10">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to 'Cancel', tasks_path, class: "btn btn-default" %>
+  </div>
+</div>
+
 <% end %>
