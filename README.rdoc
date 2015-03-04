@@ -1,2 +1,0 @@
-[![Build Status](https://travis-ci.org/JMince/gCamp.svg)](https://travis-ci.org/JMince/gCamp)
-https://travis-ci.org/JMince/gCamp
