@@ -26,6 +26,7 @@
   <div class = "col-sm-offset-2 col-sm-10">
     <%= f.submit class: "btn btn-primary" %>
     <%= link_to 'Cancel', users_path, class: "btn btn-default" %>
+    <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you certain?'}, class: "btn btn-danger pull left" %>
   </div>
 </div>
 <% end %>

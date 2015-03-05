@@ -1,14 +1,14 @@
 <%= form_for @task do |f| %>
 <%= render partial: "/shared/errors", locals:{object: @task} %>
 <div class ="form-group">
-    <%= f.label :name, 'Description', class: "col-sm-2 control-label" %>
+    <%= f.label :description, class: "col-sm-2 control-label" %>
    <div class = "col-sm-4">
     <%= f.text_field :description, class:"form-control" %>
   </div>
 </div>
 
 <div class ="form-group">
-   <%= f.label :name, "Due Date", class: "col-sm-2 control-label" %>
+   <%= f.label :date, "Due Date", class: "col-sm-2 control-label" %>
   <div class = "col-sm-4">
     <%= f.date_field :date, class: "col-sm-4 form-control" %>
   </div>
