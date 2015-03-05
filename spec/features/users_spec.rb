@@ -51,8 +51,6 @@ feature 'Users' do
     click_on 'George Jetson'
     click_on 'Edit'
     click_on 'Delete'
-    # # expect(page).to have_content('Are you certain?')
-    # click_on 'OK'
 
     expect(page).to have_no_content('George Jetson')
     expect(page).to have_content('User was succesfully deleted')
