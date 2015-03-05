@@ -45,18 +45,19 @@ feature 'Users' do
 
   end
 
-  # scenario 'User can delete users' do
-  #   visit root_path
-  #   click_on 'Users'
-  #   click_on 'George Jetson'
-  #   click_on 'Edit'
-  #   click_on 'Delete'
-  #   click_on 'OK'
-  #
-  #   expect(page).to have_no_content('George Jetson')
-  #   expect(page).to have_content('User was succesfully deleted')
-  #
-  # end
+  scenario 'User can delete users' do
+    visit root_path
+    click_on 'Users'
+    click_on 'George Jetson'
+    click_on 'Edit'
+    click_on 'Delete'
+    # # expect(page).to have_content('Are you certain?')
+    # click_on 'OK'
+
+    expect(page).to have_no_content('George Jetson')
+    expect(page).to have_content('User was succesfully deleted')
+
+  end
 
 
   scenario 'Users see an error message if they do not fill in last name' do
