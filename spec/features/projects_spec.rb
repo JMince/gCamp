@@ -3,6 +3,11 @@ require 'rails_helper'
 
 feature 'Projects' do
 
+  before do
+    @user1 = User.create(first_name: 'First', last_name: 'Last', email: 'email@mail.com', password: 'securepass', password_confirmation: 'securepass')
+    sign_in(@user1)
+  end
+
   before :each do
     @project = Project.create( name: 'Super New Project')
   end

@@ -4,6 +4,8 @@ feature 'Tasks' do
 
   before :each do
     @task = Task.create( description: 'Brand New Task', date: '2015-4-10')
+    @user1 = User.create(first_name: 'First', last_name: 'Last', email: 'email@mail.com', password: 'securepass', password_confirmation: 'securepass')
+    sign_in(@user1)
   end
 
 

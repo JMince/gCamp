@@ -4,7 +4,8 @@ require 'rails_helper'
 
 
     before do
-      sign_in
+      @user1 = User.create(first_name: 'First', last_name: 'Last', email: 'email@mail.com', password: 'securepass', password_confirmation: 'securepass')
+      sign_in(@user1)
     end
 
     scenario 'logged in users can see project, tasks, and users' do
@@ -21,10 +22,10 @@ require 'rails_helper'
 
     scenario 'Users can signout' do
       visit root_path
-      click_on 'Sign out'
+      click_on 'Sign Out'
       expect(page).to have_content('You have successfully logged out')
       expect(page).to have_content('Sign In')
-      expect(page).to have_no_content('Sign out')
+      expect(page).to have_no_content('Sign Out')
       expect(current_path).to eq '/'
     end
 

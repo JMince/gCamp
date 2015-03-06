@@ -8,28 +8,39 @@
 </head>
 <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
+
     <div class="container">
-      <p class="navbar-brand">gCamp</p>
+      <%= link_to 'gCamp', root_path, class: "navbar-brand" %>
+      <% if current_user %>
+      <ul class = "nav navbar-nav navbar-right" >
+        <li> <%= link_to "#{current_user.first_name} #{current_user.last_name}", user_path(current_user) %> </li>
+        <li> <%= link_to "Sign Out", sign_out_path %> </li>
+      </ul>
+      <% else %>
+      <ul class = "nav navbar-nav navbar-right" >
+        <li> <%= link_to "Sign Up", sign_up_path %> </li>
+        <li> <%= link_to "Sign In", sign_in_path %> </li>
+      </ul>
+      <% end %>
     </div>
   </nav>
+
   <div class="container">
-    <% if notice %>
-  <p class="alert alert-success" role="alert"><%= notice %></p>
-  <% end %>
+    <% if flash[:notice]%>
+      <div class = "alert alert-success">
+        <%= flash[:notice] %>
+      </div>
+    <%end%>
 
-  <% if danger %>
-  <p class="alert alert-danger" role="alert"><%= notice %></p>
-  <% end %>
+    <% if flash[:danger]%>
+      <div class = "alert alert-danger">
+        <%= flash[:danger] %>
+      </div>
+    <%end%>
 
-  <% if current_user %>
-    <%= "#{current_user.first_name} #{current_user.last_name}" %>
-    <%= link_to "Sign out", sign_out_path %>
-  <% else %>
-    <%= link_to "Sign Up", sign_up_path %>
-    <%= link_to "Sign In", sign_in_path %>
-  <% end %>
 
     <%= yield %>
+
     <footer>
 
       <hr>
