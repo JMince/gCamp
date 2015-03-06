@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   resources :users
   resources :projects
 
+  get 'sign-up', to: 'registration#new'
+  post 'sign-up', to: 'registration#create'
+  get 'sign-in', to: 'authentication#new'
+  post 'sign-in', to: 'authentication#create'
+  get 'sign-out', to: 'authentication#destroy'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

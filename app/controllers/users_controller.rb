@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :auth
+
   def index
     @users = User.all
   end

@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
 
+  before_action :auth  
+
   def index
     @projects = Project.all
   end
