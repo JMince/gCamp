@@ -42,7 +42,7 @@ feature 'Users' do
       click_on 'Sign Up'
     end
 
-    expect(page).to have_content('You have successfully')
+    expect(page).to have_content('You have successfully signed up')
     expect(page).to have_content('Artemus Pyle')
 
   end

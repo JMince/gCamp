@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Sign Up' do
 
-  scenario 'user can sign up' do
+  scenario 'user can sign up with flash message' do
     visit root_path
     click_on 'Sign Up'
     expect(page).to have_content("Sign up for gCamp!")
@@ -17,5 +17,5 @@ feature 'Sign Up' do
     expect(page).to have_content('first1 last1')
     expect(page).to have_no_content( 'Sign Up')
   end
- 
+
 end
