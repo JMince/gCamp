@@ -1,20 +1,51 @@
-<h1>Sign up for gCamp!</h1>
+<div class = "container">
+  <div class = "col-md-6 col-md-offset-2">
+    <div class = "well">
 
-<%= form_for @user, url: sign_up_path do |f| %>
-<%= f.label :first_name %>
-<%= f.text_field :first_name %>
-<br>
-<%= f.label :last_name %>
-<%= f.text_field :last_name %>
-<br>
-<%= f.label :email %>
-<%= f.email_field :email %>
-<br>
-<%= f.label :password %>
-<%= f.password_field :password %>
-<br>
-<%= f.label :password_confirmation %>
-<%= f.password_field :password_confirmation %>
-<br>
-<%= f.submit 'Sign Up' %>
-<% end %>
+      <div class = "page-header">
+        <h1>Sign up for gCamp!</h1>
+      </div>
+
+      <% if @user.errors.any? %>
+    <div class="text-danger">
+      <% @user.errors.full_messages.each do |message| %>
+        <%= message %><br>
+      <% end %>
+    </div>
+      <% end %>
+
+      <%= form_for @user, url: sign_up_path do |f| %>
+      <div class = "form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class:"form-control"%>
+      </div>
+
+      <div class = 'form-group'>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: 'form-control' %>
+      </div>
+
+      <div class = 'form-group'>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+
+      <div class = 'form-group'>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+
+      <div class = 'form-group'>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+
+      <div class = 'form-group'>
+        <%= f.submit 'Sign Up', class: "btn btn-default" %>
+      </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
