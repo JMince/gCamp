@@ -12,4 +12,6 @@
 <li><%= @project.name %></li>
 </ol>
 <%= link_to pluralize(@project.tasks.count, 'Task') , project_tasks_path(@project) %>
+<div>
 <%= link_to pluralize(@project.memberships.count, 'Membership') , project_memberships_path(@project) %>
+</div>
