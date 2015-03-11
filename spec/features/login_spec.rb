@@ -8,13 +8,11 @@ require 'rails_helper'
       sign_in(@user1)
     end
 
-    scenario 'logged in users can see project, tasks, and users' do
+    scenario 'logged in users can see project, and users' do
 
       expect(current_path).to eq '/'
       click_on 'Projects'
       expect(page).to have_content('Projects')
-      click_on 'Tasks'
-      expect(page).to have_content('Tasks')
       click_on 'Users'
       expect(page).to have_content('Users')
     end
