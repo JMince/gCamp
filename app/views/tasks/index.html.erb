@@ -1,10 +1,11 @@
 
     <div class = "page-header">
-      <div class = "pull-right">
-        <%= link_to 'New Task', new_project_task_path, class: "btn btn-info" %>
-      </div>
-      <h1>Tasks</h1>
+        <%= link_to 'New Task', new_project_task_path, class: "btn btn-info pull-right" %>
+        <h1>Tasks for <%= @project.name %> </h1>
     </div>
+    <ol class = "breadcrumb">
+    <li><%= link_to "Projects", projects_path %> / <%= link_to @project.name, project_path(@project) %> / Tasks</li>
+    </ol>
 
     <table class = "table">
         <thead>
