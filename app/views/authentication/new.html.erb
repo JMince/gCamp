@@ -2,10 +2,14 @@
 <div class = "container">
   <div class = "col-md-6 col-md-offset-2">
     <div class = "well">
-
-    <div class = "page-header">
+      <div class = "page-header">
       <h3> Sign into gCamp!</h3>
     </div>
+    <% if flash[:danger]%>
+      <div class = "text-danger">
+        <%= flash[:danger] %>
+      </div>
+    <%end%>
     <%= form_tag sign_in_path do %>
 
     <div class = "form-group">

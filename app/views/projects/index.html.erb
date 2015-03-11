@@ -9,19 +9,16 @@
     <table class = "table">
         <thead>
         <tr>
-          <div class = "col-sm-1">
             <th>Name</th>
-          </div>
+            <th>Tasks</th>
         </tr>
       </thead>
       <tbody>
         <% @projects.each do |project| %>
         <tr>
               <td class = "col-sm-3"><%= link_to project.name, project_path(project) %></td>
-              </td>
-             <td>
-         </td>
-        </tr>
+             <td><%= link_to pluralize(project.tasks.count, 'Task') , project_tasks_path(project) %></td>                      
+          </tr>
         <% end %>
       </tbody>
     </table>

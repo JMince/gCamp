@@ -1,6 +1,6 @@
 
 <div class = "page-header">
-  <%= link_to 'Edit', edit_task_path(@task[:id]), class: "btn btn-info pull-right" %>
+  <%= link_to 'Edit', edit_project_task_path(@project.id, @task[:id]), class: "btn btn-info pull-right" %>
 
   <% if @task.complete == true %>
     <h1><s><%= @task.description %></s></h1>
@@ -10,7 +10,7 @@
 </div>
 <div class="form-horizontal">
   <ol class="breadcrumb">
-    <li><%= link_to "Tasks", tasks_path %></li>
+    <li><%= link_to "Tasks", project_tasks_path( @project )%></li>
     <li class="active"><%= @task.description %></li>
   </ol>
 </div>

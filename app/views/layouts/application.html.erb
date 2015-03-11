@@ -32,11 +32,11 @@
       </div>
     <%end%>
 
-    <% if flash[:danger]%>
+    <!-- <% if flash[:danger]%>
       <div class = "alert alert-danger">
         <%= flash[:danger] %>
       </div>
-    <%end%>
+    <%end%> -->
 
 
     <%= yield %>
@@ -52,7 +52,7 @@
         <%= link_to image_tag("git-badge.png", class: "small_image"), "https://github.com/JMince" %>
         <%= link_to image_tag("linked-in-badge.jpg", class: "small_image"), "https://www.linkedin.com/in/jeffmince" %>
       <% else %>
-        <%= link_to "About", about_path %>  |  <%= link_to "Terms", terms_path %> |  <%= link_to "FAQ", faq_path %>  |  <%= link_to "Tasks", tasks_path %>
+        <%= link_to "About", about_path %>  |  <%= link_to "Terms", terms_path %> |  <%= link_to "FAQ", faq_path %>
           | <%= link_to "Users", users_path %> | <%= link_to "Projects", projects_path %>
         <%= link_to image_tag("galvanize-badge.png", class: "smaller_image"), "http://www.galvanize.it/#welcome" %>
         <%= link_to image_tag("twitter-badge.png", class: "small_image"), "https://twitter.com/jeffrey_mince" %>

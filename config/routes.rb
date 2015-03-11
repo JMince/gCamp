@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   get '/about', to: 'about#index'
   get '/faq', to: 'common_questions#index'
 
-  resources :tasks
   resources :users
-  resources :projects
+  resources :projects do
+    resources :tasks
+    resources :memberships
+  end
 
   get 'sign-up', to: 'registration#new'
   post 'sign-up', to: 'registration#create'
