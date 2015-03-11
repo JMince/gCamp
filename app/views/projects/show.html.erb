@@ -7,5 +7,9 @@
     <%= @project.name %>
   </h1>
 </div>
+<ol class="breadcrumb">
+<li><%= link_to 'Projects', projects_path %></li>
+<li><%= @project.name %></li>
+</ol>
 <%= link_to pluralize(@project.tasks.count, 'Task') , project_tasks_path(@project) %>
 <%= link_to pluralize(@project.memberships.count, 'Membership') , project_memberships_path(@project) %>

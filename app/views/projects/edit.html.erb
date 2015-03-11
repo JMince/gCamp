@@ -3,6 +3,14 @@
     Edit Project
   </h1>
 </div>
+
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Projects', projects_path %></li>
+  <li><%= link_to @project.name, projects_path %></li>
+  <li>Edit</li>
+</ol>
+
 <div class="form-horizontal">
   <%= render "form" %>
 </div>
