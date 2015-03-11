@@ -9,6 +9,28 @@
       <li><%= link_to @project.name, project_path(@project) %> </li>
       <li>Memberships</li>
     </ol>
+
+
+    <% if @membership.errors.any? %>
+    <div class="row">
+        <div class ="col-sm-6">
+          <div class = "alert alert-danger">
+
+              <h3><%= pluralize(@membership.errors.count, "error")%>  prohibited this from being saved : </h3>
+                <ul>
+                  <% @membership.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+                </div
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+
+
+
     <div class "col-md-8">
     <div class="well">
     <%= render "form" %>
@@ -16,7 +38,7 @@
   <div class="row">
 <div class="col-md-7">
   <table class="table">
-        <% @memberships.each do |membership| %>
+    <% @project.memberships.each do |membership| %>
           <% if membership.user.present? && membership.id.present? %>
             <%= form_for [@project, membership], html: {class: 'form-inline'} do |f| %>
             <tr>
