@@ -31,7 +31,7 @@ feature 'Tasks' do
 
     end
 
-      scenario 'User can edit a funish Task' do
+      scenario 'User can edit a fun-like Task' do
         visit project_task_path(@project_new, @task_new)
         click_on 'Edit'
         fill_in :task_description, with: 'Super Fun Task'
@@ -52,7 +52,7 @@ feature 'Tasks' do
 
 
       scenario 'Users see an error message if they do not fill in description' do
-        visit new_project_task_path(@project_new) 
+        visit new_project_task_path(@project_new)
         fill_in 'Date', with:'2018-4-13'
         click_on 'Create Task'
 

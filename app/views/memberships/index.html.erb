@@ -13,14 +13,9 @@
     <div class="well">
     <%= render "form" %>
   </div>
-
+  <div class="row">
+<div class="col-md-7">
   <table class="table">
-    <thead>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </thead>
         <% @memberships.each do |membership| %>
           <% if membership.user.present? && membership.id.present? %>
             <%= form_for [@project, membership], html: {class: 'form-inline'} do |f| %>
@@ -42,5 +37,7 @@
       <% end %>
 
   </table>
+</div>
+</div>
     </div
 </div>
