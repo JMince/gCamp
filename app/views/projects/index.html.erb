@@ -16,8 +16,8 @@
       <tbody>
         <% @projects.each do |project| %>
         <tr>
-              <td class = "col-sm-3"><%= link_to project.name, project_path(project) %></td>
-             <td><%= link_to pluralize(project.tasks.count, 'Task') , project_tasks_path(project) %></td>
+              <td class = "col-sm-4"><%= link_to project.name, project_path(project) %></td>
+             <td><%= link_to project.tasks.count, project_tasks_path(project) %></td>
           </tr>
         <% end %>
       </tbody>
