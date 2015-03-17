@@ -22,9 +22,12 @@
         <% @tasks.each do |task| %>
         <tr>
           <% if task.complete %>
-              <td class = "col-sm-3"><s><%= link_to task.description, project_task_path( @project, task) %></s></td>
+              <td class = "col-sm-3">
+                <s><%= link_to task.description, project_task_path( @project, task) %></s></td>
           <% else %>
-              <td><%= link_to task.description, project_task_path( @project, task) %></td>
+              <td><%= link_to task.description, project_task_path( @project, task) %>
+              <%= link_to task.comments.count, task_comments_path( @project, task), class: "badge" %></td>
+
           <% end %>
               <td><% if task.date %>
                     <%= task.date.strftime("%m/%d/%Y") %>
@@ -34,7 +37,7 @@
              <td>
           <div class = "pull-right">
             <%= link_to 'Edit', edit_project_task_path(@project, task), class: "btn btn-info" %>
-            <%= link_to "Delete", project_task_path(@project, task), method: :delete, class: "btn btn-danger" %>
+            <%= link_to " ", project_task_path(@project, task), method: :delete, class: "glyphicon glyphicon-remove" %>
           </div>
          </td>
         </tr>

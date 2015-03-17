@@ -2,6 +2,7 @@
 <div class = "page-header">
   <%= link_to 'Edit', edit_project_task_path(@project.id, @task[:id]), class: "btn btn-info pull-right" %>
 
+
   <% if @task.complete == true %>
     <h1><s><%= @task.description %></s></h1>
       <% else %>
@@ -19,3 +20,14 @@
       <strong>Due On:</strong>
       <%= @task.date.strftime("%m/%d/%Y") %>
       <% end %>
+
+<% @task.comments.each do |comment| %>
+  <%= link_to comment.user.full_name, user_path(comment.user) %>
+  <%= time_ago_in_words(comment.created_at) + " ago" %>
+  <%= comment.content %>
+<% end %>
+
+ <%= form_for [@task, @comment] do |f|%>
+   <%= f.text_area :content %>
+   <%= f.submit "Add Comment" %>
+ <% end %>

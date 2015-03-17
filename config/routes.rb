@@ -16,6 +16,12 @@ Rails.application.routes.draw do
     resources :memberships
   end
 
+  resources :tasks do
+    resources :comments
+
+  end
+
+
   get 'sign-up', to: 'registration#new'
   post 'sign-up', to: 'registration#create'
   get 'sign-in', to: 'authentication#new', as: 'signin'
