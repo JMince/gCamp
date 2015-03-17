@@ -43,9 +43,9 @@ feature 'Tasks' do
 
 
 
-      scenario 'User can delete a tasks' do
+      scenario 'User can delete a task' do
         visit project_tasks_path(@project_new)
-        click_on 'Delete'
+        page.find(".glyphicon-remove").click
         expect(page).to have_no_content('Fun Task')
 
       end
@@ -60,11 +60,6 @@ feature 'Tasks' do
         expect(page).to have_content( '1 Error prohibted this object from being saved')
         expect(page).to have_content( 'Description can\'t be blank')
       end
-
-
-
-
-
 
 
 
