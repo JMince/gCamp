@@ -26,7 +26,7 @@
                 <s><%= link_to task.description, project_task_path( @project, task) %></s></td>
           <% else %>
               <td><%= link_to task.description, project_task_path( @project, task) %>
-              <%= link_to task.comments.count, task_comments_path( @project, task), class: "badge" %></td>
+              <%= link_to task.comments.count, project_task_path( @project, task), class: "badge" %></td>
 
           <% end %>
               <td><% if task.date %>

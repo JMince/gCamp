@@ -1,0 +1,65 @@
+<h1 class="page-header">
+    <%if @task.completed==true then %>
+      <s><%= @task.description %></s>
+    <% else %>
+      <%= @task.description %>
+    <% end %>
+
+    <div class= "pull-right">
+         <%= link_to 'Edit', edit_project_task_path(@project, @task), class: "btn btn-info" %>
+    </div>
+  </h1>
+
+  <ol class = "breadcrumb">
+    <li> <%= link_to "Projects", projects_path %> / <%= link_to @project.name, project_path(@project) %> / <%= link_to "Tasks", project_tasks_path(@project) %> / <%= @task.description %></li>
+  </ol>
+
+  <p>
+    <strong>
+      Due On:
+    </strong>
+      <% if @task.due_date %>
+        <%= @task.due_date.strftime("%m/%d/%Y") %>
+      <% end %>
+  </p>
+
+  <h1> Comments </h1>
+
+  <% @task.comments.each do |c| %>
+      <div class="row">
+        <div class="col-sm-3 pull-left">
+          <% unless c.user %>
+            <p>(deleted user)</p>
+            <div class="text-muted">
+              <%= time_ago_in_words(c.created_at) + " ago" %>
+            </div>
+            </div>
+            <div class="col-sm-9">
+              <%= c.content %>
+            </div>
+          <% else %>
+            <%= link_to c.user.full_name, user_path(c.user) %>
+            <div class="text-muted">
+              <%= time_ago_in_words(c.created_at) + " ago" %>
+            </div>
+            </div>
+            <div class="col-sm-9">
+              <%= c.content %>
+            </div>
+          <% end %>
+      </div>
+      <p class="lead"></p>
+
+  <% end %>
+
+  <%= form_for [@task, @comment] do |f| %>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-md-9">
+        <div class="form-group">
+          <%= f.text_area :content, class: "form-control"%>
+        </div>
+        <%= f.submit "Add Comment", class: "btn btn-info" %>
+      </div>
+    </div>
+
+  <% end %>
