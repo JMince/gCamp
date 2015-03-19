@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
     has_many :memberships
     has_many :projects, through: :memberships
 
-    has_many :comments
+    has_many :comments, dependent: :nullify
     has_many :tasks, through: :comments
 
     def full_name
