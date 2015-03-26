@@ -1,4 +1,4 @@
-class WelcomeController < ApplicationController
+class WelcomeController < PublicController
   def index
     @quotes ={'"gCamp has changed my life!  It\'s the best tool I\'ve ever used."' => '- Cayla Hayes',
       '"Before gCamp I was a disorderly slob.  Now I\'m more organized than I\'ve ever been."' => '- Leta Jaskolski',
