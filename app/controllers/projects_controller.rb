@@ -1,6 +1,5 @@
 class ProjectsController < ApplicationController
-
-  before_action :auth  
+  before_action :auth
 
   def index
     @projects = Project.all
@@ -12,15 +11,16 @@ class ProjectsController < ApplicationController
   end
 
 
-  def create
-    @project = Project.new(project_params)
-    if @project.save
-      flash[:notice] = 'Project was successfully created'
-      redirect_to project_path(@project)
-    else
-      render :new
+    def create
+      @project = Project.new(project_params)
+      if @project.save
+        flash[:notice] = 'Project was successfully created'
+        redirect_to project_path(@project)
+        @project.memberships.create!(role: 2, user_id: current_user.id)
+      else
+        render :new
+      end
     end
-  end
 
 
   def show

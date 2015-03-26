@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
     has_secure_password
     validates :password_confirmation, :presence => true, :confirmation => true
 
-    has_many :memberships
+    has_many :memberships, dependent: :destroy
     has_many :projects, through: :memberships
 
-    has_many :comments, dependent: :nullify
+    has_many :comments, dependent: :destroy
     has_many :tasks, through: :comments
 
     def full_name

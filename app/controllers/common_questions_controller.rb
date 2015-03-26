@@ -1,4 +1,4 @@
-class CommonQuestionsController < ApplicationController
+class CommonQuestionsController < PublicController
   def index
   @faq_array =[CommonQuestion.new('What is gCamp?', 'gCamp is an awesome tool that is going to change your life
       gCamp is your one stop shop to organize all your tasks. You\'ll also be able to track comments
