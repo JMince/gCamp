@@ -17,4 +17,5 @@ class ApplicationController < ActionController::Base
       flash[:danger] = "You must sign in"
     end
   end
+  
 end

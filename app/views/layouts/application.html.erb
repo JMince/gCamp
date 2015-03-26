@@ -10,12 +10,13 @@
 
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-      
+
       <%= link_to 'gCamp', projects_path, class: "navbar-brand" %>
       <ul class = "nav navbar-nav">
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
+              <% if current_user %>
               <% current_user.projects.each do |project| %>
               <li> <%= link_to "#{project.name}", project_path(project) %></li>
               <% end %>
@@ -25,6 +26,7 @@
           </li>
           <li> <%= link_to "Users", users_path %></li>
       </ul>
+      <% end %>
 
 
       <% if current_user %>
