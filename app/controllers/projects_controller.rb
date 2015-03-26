@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
       @project = Project.new(project_params)
       if @project.save
         flash[:notice] = 'Project was successfully created'
-        redirect_to project_path(@project)
+        redirect_to project_tasks_path(@project)
         @project.memberships.create!(role: 2, user_id: current_user.id)
       else
         render :new
