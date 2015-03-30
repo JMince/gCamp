@@ -1,6 +1,7 @@
 class MembershipsController < ApplicationController
 
   before_action :find_and_set_project
+  before_action :limit_actions
 
 
     def index
