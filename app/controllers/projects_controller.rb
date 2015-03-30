@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :auth
+  before_action :set_project, only: [:edit, :show, :update, :destroy]
+  before_action :project_owner_auth, only: [:edit, :update, :destroy]
 
   def index
     @projects = Project.all
@@ -62,6 +64,14 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name)
+  end
+
+  def project_owner_auth
+    unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(role: 1) || current_user.permission == true)
+
+      flash[:danger] = "You do not have access to that project"
+      redirect_to projects_path
+    end
   end
 
 
