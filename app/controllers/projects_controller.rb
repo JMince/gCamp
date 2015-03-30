@@ -2,9 +2,10 @@ class ProjectsController < ApplicationController
   before_action :auth
   before_action :set_project, only: [:edit, :show, :update, :destroy]
   before_action :project_owner_auth, only: [:edit, :update, :destroy]
+  before_action :project_member_auth, only: [:show, :edit, :update, :destroy]
 
   def index
-    @projects = Project.all
+    @projects = current_user.projects.all
   end
 
 
@@ -47,7 +48,7 @@ class ProjectsController < ApplicationController
 
 
   def destroy
-    project=Project.find(params[:id])
+    project = Project.find(params[:id])
     if project.destroy
       flash[:notice] = 'Project was successfully deleted'
       redirect_to projects_path
@@ -68,7 +69,13 @@ class ProjectsController < ApplicationController
 
   def project_owner_auth
     unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(role: 1) || current_user.permission == true)
+      flash[:danger] = "You do not have access to that project"
+      redirect_to projects_path
+    end
+  end
 
+  def project_member_auth
+    if !current_user.projects.include?(@project)
       flash[:danger] = "You do not have access to that project"
       redirect_to projects_path
     end
