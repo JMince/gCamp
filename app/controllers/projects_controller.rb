@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
       if @project.save
         flash[:notice] = 'Project was successfully created'
         redirect_to project_tasks_path(@project)
-        @project.memberships.create!(role: 2, user_id: current_user.id)
+        @project.memberships.create!(role: 1, user_id: current_user.id)
       else
         render :new
       end
@@ -68,14 +68,14 @@ class ProjectsController < ApplicationController
   end
 
   def project_owner_auth
-    unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(role: 1) || current_user.permission == true)
+    unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(role: 1))
       flash[:danger] = "You do not have access to that project"
       redirect_to projects_path
     end
   end
 
   def project_member_auth
-    if !current_user.projects.include?(@project)
+    unless current_user.projects.include?(@project)
       flash[:danger] = "You do not have access to that project"
       redirect_to projects_path
     end
