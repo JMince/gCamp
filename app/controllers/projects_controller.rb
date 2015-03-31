@@ -6,6 +6,8 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = current_user.projects.all
+    # @tracker_api = TrackerAPI.new
+    # @tracker_projects = @tracker_api.projects(current_user.pivotal_token)
   end
 
 
@@ -63,7 +65,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name)
+    params.require(:project).permit(:name, :pivotal_token)
   end
 
   def project_owner_auth

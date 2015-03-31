@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :auth
+  helper_method :match_users
 
   def index
     @users = User.all
@@ -60,9 +61,14 @@ class UsersController < ApplicationController
 
   def user_params
     if current_user.admin
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin, :pivotal_token)
     else
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :pivotal_token)
     end
   end
+
+  def match_users(user)
+    (current_user.memberships.pluck(:project_id) & user.memberships.pluck(:project_id)).empty?
+  end
+
 end

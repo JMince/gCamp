@@ -1,6 +1,8 @@
 
 <div class = "page-header">
-  <%= link_to 'Edit', edit_user_path(@user[:id]), class: "btn btn-info pull-right" %>
+  <% if current_user.id == @user.id || current_user.admin == true %>
+    <%= link_to 'Edit', edit_user_path(@user[:id]), class: "btn btn-info pull-right" %>
+  <% end %>
 
       <h1><%= @user.first_name %> <%= @user.last_name %></h1>
 </div>
@@ -12,6 +14,8 @@
         <dt><b>Last Name</b></dt>
         <dd><%= @user.last_name %></dd>
     <br>
-        <dt><b>Email</b></dt>
-        <dd><%= mail_to @user.email %></dd>
+    <% if !match_users(@user) %>
+      <dt><b>Email</b></dt>
+      <dd><%= mail_to @user.email %></dd>
+    <% end %>
 </dl>
