@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   helper_method :auth
+  helper_method :owner_count
 
   def current_user
     if session[:user_id].present?
@@ -24,5 +25,9 @@ class ApplicationController < ActionController::Base
       redirect_to projects_path
     end
   end
+
+  def owner_count(project)
+   project.memberships.where(role:1).count
+ end
 
 end
