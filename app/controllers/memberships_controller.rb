@@ -2,6 +2,7 @@ class MembershipsController < ApplicationController
 
   before_action :find_and_set_project
   before_action :limit_actions
+  before_action :set_membership, only: [ :show, :edit, :update, :destroy]
 
 
     def index
@@ -23,14 +24,15 @@ class MembershipsController < ApplicationController
 
 
     def update
-      @membership = Membership.find(params[:id])
-      if @membership.update(membership_params)
-        flash[:notice] = "#{@membership.user.full_name} was successfully updated"
-        redirect_to project_memberships_path(@project.id)
-      else
-        render :index
-      end
-    end
+     if owner_count(@project) == 1 && @membership.role == 1
+       flash[:danger] = "Projects must have at least one owner"
+       redirect_to project_memberships_path(@project.id)
+     elsif @membership.update(membership_params)
+       redirect_to project_memberships_path(@project.id)
+     else
+       render :index
+     end
+   end
 
     def destroy
       membership = Membership.find(params[:id])
@@ -44,6 +46,10 @@ class MembershipsController < ApplicationController
 
 
 private
+
+def set_membership
+   @membership = @project.memberships.find(params[:id])
+ end
 
 def membership_params
   params.require(:membership).permit(:user_id, :project_id, :role)
