@@ -6,9 +6,8 @@ class MembershipsController < ApplicationController
 
     def index
       @memberships = @project.memberships
-
       @membership = @project.memberships.new
-
+      @project_name = @project.name
     end
 
 
@@ -37,7 +36,7 @@ class MembershipsController < ApplicationController
       membership = Membership.find(params[:id])
       membership.destroy
       flash[:notice] = "#{membership.user.full_name} was successfully removed"
-      redirect_to project_memberships_path(@project.id)
+      redirect_to projects_path
     end
 
 
