@@ -36,9 +36,14 @@ class MembershipsController < ApplicationController
 
     def destroy
       membership = Membership.find(params[:id])
-      membership.destroy
-      flash[:notice] = "#{membership.user.full_name} was successfully removed"
-      redirect_to projects_path
+      if Membership.find_by(project_id: @project.id, user_id: current_user.id, role: 1) || current_user.admin || current_user == membership.user 
+        membership.destroy
+        flash[:notice] = "#{membership.user.full_name} was successfully removed"
+        redirect_to projects_path
+      else
+        flash[:notice] = "You do not have access"
+        redirect_to project_path(@project)
+      end
     end
 
 
