@@ -5,9 +5,9 @@ class CommentsController < ApplicationController
     @task = Task.find(params[:task_id])
     @comment = Comment.new(comment_params)
     if @comment.save
-    redirect_to project_task_path(@task.project.id, @task)
+      redirect_to project_task_path(@task.project.id, @task)
     else
-    redirect_to project_task_path(@task.project.id, @task)
+      redirect_to project_task_path(@task.project.id, @task)
   end
 end
 
