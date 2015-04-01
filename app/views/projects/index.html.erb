@@ -14,12 +14,36 @@
         </tr>
       </thead>
       <tbody>
-        <% @projects.each do |project| %>
-        <tr>
+        <% if current_user.admin == true %>
+            <% @projects.each do |project| %>
+            <tr>
               <td class = "col-sm-4"><%= link_to project.name, project_path(project) %></td>
-             <td><%= link_to project.tasks.count, project_tasks_path(project) %></td>
+              <td><%= link_to project.tasks.count, project_tasks_path(project) %></td>
+            </tr>
+            <% end %>
+        <%else%>
+          <% current_user.projects.each do |project| %>
+          <tr>
+            <td class = "col-sm-4"><%= link_to project.name, project_path(project) %></td>
+            <td><%= link_to project.tasks.count, project_tasks_path(project) %></td>
           </tr>
         <% end %>
+      <% end %>
       </tbody>
     </table>
-    <%= @tracker_projects %>
+    <% if @tracker_projects %>
+      <h1 class = "page-header">
+        Pivotal Tracker Projects
+      </h1>
+      <table class="table">
+        <thead>
+          <th> Name </th>
+        </thead>
+
+        <% @tracker_projects.each do |tracker_project| %>
+          <tr>
+            <td><%= link_to tracker_project[:name], "tracker_projects/#{tracker_project[:id]}" %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>

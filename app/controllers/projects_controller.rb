@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   before_action :project_member_auth, only: [:show, :edit, :update, :destroy]
 
   def index
-    @projects = current_user.projects.all
+    @projects = Project.all
     @tracker_api = TrackerAPI.new
     if current_user.pivotal_token
       @tracker_projects = @tracker_api.projects(current_user.pivotal_token)

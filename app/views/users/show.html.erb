@@ -1,7 +1,7 @@
 
 <div class = "page-header">
   <% if current_user.id == @user.id || current_user.admin == true %>
-    <%= link_to 'Edit', edit_user_path(@user[:id]), class: "btn btn-info pull-right" %>
+    <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-info pull-right" %>
   <% end %>
 
       <h1><%= @user.first_name %> <%= @user.last_name %></h1>

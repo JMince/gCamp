@@ -20,7 +20,7 @@
     <% @users.each do |user| %>
        <tr>
           <td class = "col-sm-3"><%= link_to user.first_name + " " + user.last_name, user_path(user) %></td>
-          <% if !match_users(user) %>
+          <% if !match_users(user) || current_user.admin == true %>
             <td><%= mail_to user.email %></td>
           <% else %>
             <td></td>

@@ -1,17 +1,16 @@
 class UsersController < ApplicationController
-
   before_action :auth
   helper_method :match_users
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :render_404, only: [:edit, :update]
 
   def index
     @users = User.all
   end
 
-
   def new
     @user = User.new
   end
-
 
   def create
     @user = User.new(user_params)
@@ -24,21 +23,13 @@ class UsersController < ApplicationController
     end
   end
 
-
   def show
-    @user = User.find(params[:id])
   end
-
-
 
   def edit
-@user = User.find(params[:id])
   end
 
-
   def update
-    @user = User.find(params[:id])
-
     if @user.update(user_params)
       redirect_to user_path(@user)
       flash[:notice] = "User was successfully updated"
@@ -47,12 +38,18 @@ class UsersController < ApplicationController
     end
   end
 
-
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    flash[:notice] = "User was succesfully deleted"
-    redirect_to users_path
+    if current_user == @user
+      session.clear
+      @user.destroy
+      flash[:notice] = "User was successfully deleted"
+      redirect_to root_path
+    else
+
+      @user.destroy
+      flash[:notice] = "User was succesfully deleted"
+      redirect_to users_path
+    end
   end
 
 
@@ -70,5 +67,20 @@ class UsersController < ApplicationController
   def match_users(user)
     (current_user.memberships.pluck(:project_id) & user.memberships.pluck(:project_id)).empty?
   end
+
+  def current_user_or_admin
+    current_user.id == @user.id || current_user.admin == true
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def render_404
+    unless current_user.id == @user.id
+      render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+    end
+  end
+
 
 end
