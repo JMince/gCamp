@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def limit_actions
-    unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(project_id: @project.id))
+    unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(project_id: @project.id)) || current_user.admin
       flash[:danger] = "You do not have access to that project"
       redirect_to projects_path
     end

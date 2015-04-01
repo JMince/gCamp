@@ -69,7 +69,7 @@ class UsersController < ApplicationController
   end
 
   def current_user_or_admin
-    current_user.id == @user.id || current_user.admin == true
+    @current_user.id == @user.id
   end
 
   def set_user
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   end
 
   def render_404
-    unless current_user.id == @user.id
+    unless current_user.id == @user.id || current_user.admin
       render file: "#{Rails.root}/public/404.html", layout: false, status: 404
     end
   end

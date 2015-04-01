@@ -51,6 +51,4 @@ group :development, :test do
   gem 'launchy'
 
   gem 'pry-rails'
-
-
 end

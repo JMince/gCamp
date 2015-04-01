@@ -71,14 +71,14 @@ class ProjectsController < ApplicationController
   end
 
   def project_owner_auth
-    unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(role: 1))
+    unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(role: 1)) || current_user.admin
       flash[:danger] = "You do not have access to that project"
       redirect_to projects_path
     end
   end
 
   def project_member_auth
-    unless current_user.projects.include?(@project)
+    unless current_user.projects.include?(@project) || current_user.admin
       flash[:danger] = "You do not have access to that project"
       redirect_to projects_path
     end
