@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
       "#{first_name} #{last_name}"
     end
 
+    def token_privacy
+      self.pivotal_token[0..3] + ('*'*(self.pivotal_token.length - 4))  
+    end
+
 end

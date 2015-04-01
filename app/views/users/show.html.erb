@@ -14,8 +14,15 @@
         <dt><b>Last Name</b></dt>
         <dd><%= @user.last_name %></dd>
     <br>
-    <% if !match_users(@user) %>
+    <% if !match_users(@user) || current_user.admin == true %>
       <dt><b>Email</b></dt>
       <dd><%= mail_to @user.email %></dd>
     <% end %>
+    <br>
+    <% if @user.pivotal_token %>
+      <dt>Pivotal Tracker Token</dt>
+      <dd><%=  @user.token_privacy %></dd>
+      <br>
+      <% end %>
+
 </dl>
