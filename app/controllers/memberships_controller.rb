@@ -2,8 +2,9 @@ class MembershipsController < ApplicationController
 
   before_action :find_and_set_project
   before_action :limit_actions
-  before_action :set_membership, only: [ :show, :edit, :update, :destroy]
-  before_action :ensure_owner_or_admin, only: [:create, :update, :destroy]
+  before_action :set_membership, only: [ :show, :edit, :update]
+  before_action :ensure_owner_or_admin, only: [:create, :update]
+  before_action :ensure_member_or_admin, only: [:create,:update, :destroy]
 
 
     def index
@@ -37,12 +38,12 @@ class MembershipsController < ApplicationController
 
     def destroy
       membership = Membership.find(params[:id])
-      if Membership.find_by(project_id: @project.id, user_id: current_user.id, role: 1) || current_user.admin || current_user == membership.user
+      if Membership.find_by(project_id: @project.id, user_id: current_user.id, role: 1) || current_user.admin || current_user.id == membership.user_id
         membership.destroy
         flash[:notice] = "#{membership.user.full_name} was successfully removed"
         redirect_to projects_path
       else
-        flash[:notice] = "You do not have access"
+        flash[:danger] = "You do not have access"
         redirect_to project_path(@project)
       end
     end
@@ -64,6 +65,13 @@ private
 
   def find_and_set_project
     @project = Project.find(params[:project_id])
+  end
+
+  def ensure_member_or_admin
+    if !current_user.member_admin?(@project)
+      flash[:danger] = 'You do not have access'
+      redirect_to projects_path
+    end
   end
 
   def ensure_owner_or_admin

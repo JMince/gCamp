@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
 
   def auth
     unless current_user
+      session[:save_session] ||= request.fullpath
       redirect_to sign_in_path
       flash[:danger] = "You must sign in"
     end

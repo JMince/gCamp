@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :auth
   before_action :set_project, only: [:edit, :show, :update, :destroy]
   before_action :project_owner_auth, only: [:edit, :update, :destroy]
-  before_action :project_member_auth, only: [:show, :edit, :update, :destroy]
+  before_action :project_member_auth, only: [ :edit, :update, :destroy]
 
   def index
     @projects = Project.all
@@ -80,7 +80,7 @@ class ProjectsController < ApplicationController
   def project_member_auth
     unless current_user.projects.include?(@project) || current_user.admin
       flash[:danger] = "You do not have access to that project"
-      redirect_to projects_path
+      redirect_to project_path(@project)
     end
   end
 
