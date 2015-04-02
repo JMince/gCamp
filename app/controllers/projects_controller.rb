@@ -6,9 +6,14 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-    @tracker_api = TrackerAPI.new
+    tracker_api = TrackerAPI.new
     if current_user.pivotal_token
-      @tracker_projects = @tracker_api.projects(current_user.pivotal_token)
+      if tracker_api.projects(current_user.pivotal_token).class == Array
+        @tracker_projects = tracker_api.projects(current_user.pivotal_token)
+      else
+        flash[:danger] = 'Pivotal Tracker Token Invalid'
+        redirect_to edit_user_path(current_user)
+      end
     end
   end
 

@@ -17,7 +17,9 @@ class User < ActiveRecord::Base
   end
 
   def token_privacy
-    self.pivotal_token[0..3] + ('*'*(self.pivotal_token.length - 4))
+    if self.pivotal_token.length > 4
+      self.pivotal_token[0..3] + ('*'*(self.pivotal_token.length - 4))
+    end
   end
 
   def owner_admin?(project)
