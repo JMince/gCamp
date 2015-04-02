@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
         @tracker_projects = tracker_api.projects(current_user.pivotal_token)
       else
         flash[:danger] = 'Pivotal Tracker Token Invalid'
-        redirect_to edit_user_path(current_user)
+        @tracker_projects = []
       end
     end
   end
