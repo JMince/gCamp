@@ -5,6 +5,7 @@ class MembershipsController < ApplicationController
   before_action :set_membership, only: [ :show, :edit, :update]
   before_action :ensure_owner_or_admin, only: [:create, :update]
   before_action :ensure_member_or_admin, only: [:create,:update, :destroy]
+  before_action :ensure_at_least_one_owner, only: [:update, :destroy]
 
 
     def index
@@ -71,6 +72,13 @@ private
     if !current_user.member_admin?(@project)
       flash[:danger] = 'You do not have access'
       redirect_to projects_path
+    end
+  end
+
+  def ensure_at_least_one_owner
+    if owner_count(@project)==1
+      flash[:danger] = 'Projects much have at least one owner'
+      redirect_to project_memberships_path(@project)
     end
   end
 
