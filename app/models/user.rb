@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_secure_password
-  validates :password_confirmation, :presence => true, :confirmation => true
 
   has_many :memberships, dependent: :destroy
   has_many :projects, through: :memberships
