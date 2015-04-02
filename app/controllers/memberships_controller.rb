@@ -76,7 +76,7 @@ private
   end
 
   def ensure_at_least_one_owner
-    if owner_count(@project)==1
+    if owner_count(@project)==1 && Membership.find(params[:id]).role == 1
       flash[:danger] = 'Projects much have at least one owner'
       redirect_to project_memberships_path(@project)
     end

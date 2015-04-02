@@ -18,7 +18,7 @@ class AuthenticationController < PublicController
   end
 
   def destroy
-    session[:user_id] = nil
+    session.clear
     redirect_to root_path
     flash[:notice] = 'You have successfully logged out'
   end
