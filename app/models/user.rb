@@ -21,11 +21,11 @@ class User < ActiveRecord::Base
   end
 
   def owner_admin?(project)
-    self.memberships.find_by(project_id: project.id, user_id: self.id).role == 1 && self.memberships.find_by(project_id: project.id, user_id: self.id) != nil || self.admin
+    self.admin || self.memberships.find_by(project_id: project.id, user_id: self.id).role == 1 && self.memberships.find_by(project_id: project.id, user_id: self.id) != nil
   end
 
   def member_admin?(project)
-    self.memberships.find_by(project_id: project.id, user_id: self.id) != nil || self.admin
+    self.admin || self.memberships.find_by(project_id: project.id, user_id: self.id) != nil
   end
 
 end
