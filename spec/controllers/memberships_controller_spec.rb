@@ -1,51 +1,78 @@
 require 'rails_helper'
 
 describe MembershipsController do
- describe 'GET #index' do
-   it '' do
 
 
-   end
- end
-
- describe 'POST #create' do
-   it '' do
-
-
-   end
- end
-
- describe 'GET #new' do
-   it '' do
+  User.destroy_all
+  before {session[:user_id] = user.id}
+  let(:user1) { create_user(email: "bob@test.com") }
+  let(:user) {create_user}
+  let(:project) {create_project}
+  let(:member) {create_membership({user_id: user1.id, role: 2})}
+  let!(:owner) {create_membership}
 
 
-   end
- end
+  describe 'POST #create' do
+    it 'a new instance of a membership is persisted' do
+      member_new = { user_id: user1.id, role: 1}
 
- describe 'GET #edit' do
-   it '' do
+      post :create, project_id: project.id, id: Membership.last.id, membership: member_new
+
+      expect(assigns(:membership)).to eq Membership.last
+    end
+
+    it 'does not persist an invalid membership' do
+
+      bad_membership = {project_id: nil, user_id: nil, role: nil}
+
+      post :create, project_id: project.id, id: Membership.last.id, membership: bad_membership
+
+      expect(response).to render_template(:index)
+    end
+  end
+
+  describe 'GET #update' do
+    it 'persists valid changes' do
+      put :update, project_id: project.id, id: member.id, membership: {role: 1}
+
+      expect(member.reload.role).to eq(1)
+    end
+
+    it 'does not persist invalid changes' do
+      put :update, project_id: project.id, id:member.id, membership: {user_id: nil}
+      member.reload
+      expect(member.user_id).to eq(user1.id)
+    end
+
+    it 'if changing last owner role does not persist' do
+      post :update, project_id: project.id, id:owner.id, membership: {role: 2}
+      expect(owner.role).to eq(1)
+    end
+
+  end
+
+  describe 'DELETE #destroy' do
+    before{member}
+
+    it 'destroys a membership' do
+      expect {delete :destroy, project_id: project.id, id: member.id}.to change {Membership.all.count}.by(-1)
+    end
+
+    it 'does not destroy last owner' do
+      expect {delete :destroy, project_id: project.id, id: owner.id}.to change {Membership.all.count}.by(0)
+    end
+  end
+
+  describe 'members get redirected' do
+    before{owner.destroy}
+    before{member}
+
+    it 'tests index requires user to have owner membership' do
+      get :index, project_id: project.id
+
+      expect(response).to redirect_to(projects_path)
+    end
+  end
 
 
-   end
- end
-
- describe 'GET #show' do
-   it '' do
-
-
-   end
- end
-
- describe 'PUT #update' do
-   it '' do
-
-
-   end
- end
-
- describe 'DELETE #destroy' do
-   it '' do
-
-
-   end
- end
+end
