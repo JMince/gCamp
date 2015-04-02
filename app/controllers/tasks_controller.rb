@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
 
+  before_action :auth
   before_action :find_and_set_project
   before_action :limit_actions
 

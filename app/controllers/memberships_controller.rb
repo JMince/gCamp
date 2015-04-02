@@ -1,5 +1,6 @@
 class MembershipsController < ApplicationController
 
+  before_action :auth
   before_action :find_and_set_project
   before_action :limit_actions
   before_action :set_membership, only: [ :show, :edit, :update]
