@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Tasks' do
 
   before :each do
-    @user1 = User.create(first_name: 'First', last_name: 'Last', email: 'email@mail.com', password: 'securepass', password_confirmation: 'securepass')
+    @user1 = User.create(first_name: 'First', last_name: 'Last', email: 'email@mail.com', password: 'securepass', password_confirmation: 'securepass', admin: true)
     sign_in(@user1)
     @project_new = Project.create!( name:"New Project")
     @task_new = @project_new.tasks.create!(description: 'Fun Task', date: '2016-04-04')

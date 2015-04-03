@@ -4,7 +4,7 @@ require 'rails_helper'
 feature 'Projects' do
 
   before do
-    @user1 = User.create(first_name: 'First', last_name: 'Last', email: 'email@mail.com', password: 'securepass', password_confirmation: 'securepass')
+    @user1 = User.create(first_name: 'First', last_name: 'Last', email: 'email@mail.com', password: 'securepass', password_confirmation: 'securepass', admin: true)
     sign_in(@user1)
   end
 
@@ -12,10 +12,10 @@ feature 'Projects' do
     @project = Project.create( name: 'Super New Project')
   end
 
-  scenario 'New project can be added' do
-      visit root_path
-      click_on 'Projects'
+scenario 'New project can be added' do
+      within(".page-header") do
       click_on 'New Project'
+      end
       fill_in 'Name', with: 'Projection Project'
       click_on 'Create Project'
 
@@ -27,7 +27,9 @@ feature 'Projects' do
 
     scenario 'User can see Project show page' do
         visit root_path
-        click_on 'Projects'
+        within("footer") do
+          click_on 'Projects'
+        end
         expect(page).to have_content('Super New Project')
         click_on 'Super New Project'
 
@@ -40,10 +42,17 @@ feature 'Projects' do
       scenario 'User can edit a Project from the show page' do
           visit root_path
           click_on 'Projects'
-          click_on 'New Project'
+            within(".page-header") do
+            click_on 'New Project'
+          end
           fill_in 'Name', with: 'Plojectile'
           click_on 'Create Project'
-          click_on 'Edit'
+            within(".breadcrumb") do
+            click_on 'Plojectile'
+          end
+            within(".page-header") do
+            click_on 'Edit'
+          end
           fill_in 'Name', with: 'Projectile'
           click_on 'Update Project'
 
@@ -68,7 +77,9 @@ feature 'Projects' do
         scenario 'Users see an error message if they do not fill in name' do
           visit root_path
           click_on 'Projects'
-          click_on 'New Project'
+            within(".page-header") do
+            click_on 'New Project'
+            end
           click_on 'Create Project'
 
           expect(page).to have_no_content('Project was successfully created')

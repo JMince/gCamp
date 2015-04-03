@@ -15,7 +15,7 @@ feature 'Users' do
       last_name: 'shmoe',
       email: 'joe@jetson.com',
       password: 'jets',
-      password_confirmation: 'jets')
+      password_confirmation: 'jets', admin: true)
   end
 
   scenario 'Test sign-in form' do
@@ -54,7 +54,6 @@ feature 'Users' do
     click_on 'joe shmoe'
 
     expect(page).to have_content('joe shmoe')
-    expect(page).to have_content('Edit')
 
   end
 

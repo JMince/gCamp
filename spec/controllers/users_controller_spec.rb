@@ -18,12 +18,13 @@ describe UsersController do
   end
 
   describe 'POST #create' do
-   it 'creates a user instance' do
-     user_hash = {description: 'description', completed: 'false', date: "2019-07-03", project_id: project.id}
-     post :create, project_id: project.id, user: user_hash
+    it 'creates a new user' do
+      bob = {first_name: "Marlon", last_name: "Brando", email: "marlin@brando.com", password: "password"}
+      post :create, user: bob
 
-     expect(assigns(:user)).to eq User.find_by_description('description')
-   end
+      expect(assigns(:user)).to eq User.find_by_first_name("Marlon")
+      expect(response).to redirect_to(users_path)
+    end
   end
 
   describe 'GET #new' do
@@ -49,9 +50,9 @@ describe UsersController do
   end
 
   describe 'PUT #update' do
-   it '' do
-     put :update, project_id: project.id, id: user.id, user: {description: "I like this description better"}
-     expect(user.reload.description).to eq("I like this description better")
+   it 'user can update user' do
+     put :update, project_id: project.id, id: user.id, user: {first_name: "Billy Bob"}
+     expect(user.reload.first_name).to eq("Billy Bob")
    end
   end
 
@@ -65,28 +66,18 @@ describe UsersController do
     before {project.memberships.destroy_all}
     before {user}
 
-    it 'if  get action' do
-
-      actions = [:index, :show, :edit]
-      actions.each do |action|
-        get action, project_id: project.id, id: user.id
-
-        expect(response).to redirect_to(projects_path)
-      end
-    end
-
     it 'if put action' do
 
       put :update, project_id: project.id, id: user.id, user: {description: "description"}
 
-      expect(response).to redirect_to(projects_path)
+      expect(response).to redirect_to(user_path user)
     end
 
     it 'if delete action' do
 
       delete :destroy, project_id: project.id, id: user.id
 
-      expect(response).to redirect_to(projects_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 

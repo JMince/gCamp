@@ -12,7 +12,7 @@ feature 'Sign Up' do
     fill_in :user_password, with: 'securepass1'
     fill_in :user_password_confirmation, with: 'securepass1'
     within("form") {click_on 'Sign Up'}
-    expect(current_path).to eq '/'
+    expect(current_path).to eq '/projects/new'
     expect(page).to have_content("You have successfully signed up")
     expect(page).to have_content('first1 last1')
     expect(page).to have_no_content( 'Sign Up')

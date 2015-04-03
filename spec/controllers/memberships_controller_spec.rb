@@ -5,7 +5,7 @@ describe MembershipsController do
 
   User.destroy_all
   before {session[:user_id] = user.id}
-  let(:user1) { create_user(email: "bob@test.com") }
+  let(:user1) { create_user(email: "curly@test.com") }
   let(:user) {create_user}
   let(:project) {create_project}
   let(:member) {create_membership({user_id: user1.id, role: 2})}
@@ -13,7 +13,7 @@ describe MembershipsController do
 
 
   describe 'POST #create' do
-    it 'a new instance of a membership is persisted' do
+    it 'a new instance of a membership created' do
       member_new = { user_id: user1.id, role: 1}
 
       post :create, project_id: project.id, id: Membership.last.id, membership: member_new
@@ -32,19 +32,19 @@ describe MembershipsController do
   end
 
   describe 'GET #update' do
-    it 'persists valid changes' do
+    it 'persists valid changes to DB' do
       put :update, project_id: project.id, id: member.id, membership: {role: 1}
 
       expect(member.reload.role).to eq(1)
     end
 
-    it 'does not persist invalid changes' do
+    it 'tests does not persist invalid changes' do
       put :update, project_id: project.id, id:member.id, membership: {user_id: nil}
       member.reload
       expect(member.user_id).to eq(user1.id)
     end
 
-    it 'if changing last owner role does not persist' do
+    it 'tests changing last owner role does not persist to DB' do
       post :update, project_id: project.id, id:owner.id, membership: {role: 2}
       expect(owner.role).to eq(1)
     end

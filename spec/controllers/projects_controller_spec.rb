@@ -62,7 +62,7 @@ describe ProjectsController do
 
   describe 'PUT #update' do
 
-    it 'if owner valid changes are permited' do
+    it 'if owner is valid changes are permited' do
       owner
       put :update, id: project.id, project: {name: "TestProject"}
       project.reload
